@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "",
+    "slug": "PhonkBox",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/PhonkBox Logo.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/PhonkBox Logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/PhonkBox Logo.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/images/PhonkBox Logo.png"
+    }
+  }
+}
