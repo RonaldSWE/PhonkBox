@@ -3,28 +3,39 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useState } from "react";
 import data from "../Data/Data";
 
+// SearchBar Component: Allows users to search for phonk songs in the app
 const SearchBar = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  // State to store the current search query
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  
+  // State to store filtered search results
   const [searchResults, setSearchResults] = useState<typeof data | null>(null);
-  const [notFound, setNotFound] = useState(false);
+  
+  // State to track if a search returned no results
+  const [notFound, setNotFound] = useState<boolean>(false);
 
+  // Handle search input changes and filter songs
   const handleSearch = (query: string) => {
     setSearchQuery(query);
 
+    // If search bar is empty, clear all results
     if (query.trim() === "") {
       setSearchResults(null);
       setNotFound(false);
       return;
     }
 
+    // Filter songs by matching the query with song names (case-insensitive)
     const results = data.filter((song) =>
       song.name.toLowerCase().includes(query.toLowerCase())
     );
 
+    // If no songs found, show "404, phonk not found" message
     if (results.length === 0) {
       setSearchResults(null);
       setNotFound(true);
     } else {
+      // If songs found, display them in results
       setSearchResults(results);
       setNotFound(false);
     }
@@ -33,6 +44,7 @@ const SearchBar = () => {
   return (
     <SafeAreaView>
       <View style={styles.container}>
+        {/* Search input field */}
         <TextInput
           placeholder="Search song"
           style={styles.searchInput}
@@ -40,21 +52,25 @@ const SearchBar = () => {
           onChangeText={handleSearch}
         />
 
+        {/* Show "404, phonk not found" message when no results are found */}
         {notFound && (
           <View style={styles.notFoundContainer}>
-            <Text style={styles.notFoundText}>404, phonk not found</Text>
+            <Text style={styles.notFoundText}>404, Phonk Not Found</Text>
           </View>
         )}
 
+        {/* Display search results as a scrollable list */}
         {searchResults && searchResults.length > 0 && (
           <ScrollView style={styles.resultsContainer}>
             {searchResults.map((song) => (
               <View key={song.id} style={styles.resultItem}>
+                {/* Display song album cover image */}
                 <Image
                   source={song.phonkImg}
                   style={styles.songImage}
                   resizeMode="cover"
                 />
+                {/* Display song name */}
                 <Text style={styles.songName}>{song.name}</Text>
               </View>
             ))}
