@@ -54,70 +54,75 @@ const Phonks = () => {
   }
 
   return (
-    <SafeAreaView style={{ backgroundColor: theme.colors.background, flex: 1 }}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{ backgroundColor: theme.colors.background }}
+    <>
+      <SearchBar />
+      <SafeAreaView
+        style={{ backgroundColor: theme.colors.background, flex: 1 }}
       >
-        <FlatList
-          data={data}
-          renderItem={({ item }) => (
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ backgroundColor: theme.colors.background }}
+        >
+          <FlatList
+            data={data}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={[
+                  styles.itemContainer,
+                  {
+                    backgroundColor: theme.colors.card,
+                    borderColor: theme.colors.border,
+                  },
+                ]}
+                onPress={() => {
+                  setSelectedItem(item);
+                  playSound(item.audio);
+                }}
+              >
+                <Image source={item.phonkImg} style={styles.itemImg} />
+                <Text style={[styles.itemText, { color: theme.colors.text }]}>
+                  {item.name}
+                </Text>
+              </TouchableOpacity>
+            )}
+          />
+        </ScrollView>
+        <Modal
+          visible={selectedItem !== null}
+          animationType="slide"
+          onRequestClose={() => {
+            stopSound();
+            setSelectedItem(null);
+          }}
+        >
+          <SafeAreaView
+            style={[
+              styles.modalContainer,
+              { backgroundColor: theme.colors.background },
+            ]}
+          >
+            <Image source={selectedItem?.phonkImg} style={styles.modalImg} />
+            <Text style={[styles.modalText, { color: theme.colors.text }]}>
+              {selectedItem?.name}
+            </Text>
             <TouchableOpacity
               style={[
-                styles.itemContainer,
-                {
-                  backgroundColor: theme.colors.card,
-                  borderColor: theme.colors.border,
-                },
+                styles.closeButton,
+                { backgroundColor: theme.colors.primary },
               ]}
               onPress={() => {
-                setSelectedItem(item);
-                playSound(item.audio);
+                stopSound();
+                setSelectedItem(null);
               }}
             >
-              <Image source={item.phonkImg} style={styles.itemImg} />
-              <Text style={[styles.itemText, { color: theme.colors.text }]}>
-                {item.name}
-              </Text>
+              <Text style={styles.closeButtonText}>Close</Text>
             </TouchableOpacity>
-          )}
-        />
-      </ScrollView>
-      <Modal
-        visible={selectedItem !== null}
-        animationType="slide"
-        onRequestClose={() => {
-          stopSound();
-          setSelectedItem(null);
-        }}
-      >
-        <SafeAreaView
-          style={[
-            styles.modalContainer,
-            { backgroundColor: theme.colors.background },
-          ]}
-        >
-          <Image source={selectedItem?.phonkImg} style={styles.modalImg} />
-          <Text style={[styles.modalText, { color: theme.colors.text }]}>
-            {selectedItem?.name}
-          </Text>
-          <TouchableOpacity
-            style={[
-              styles.closeButton,
-              { backgroundColor: theme.colors.primary },
-            ]}
-            onPress={() => {
-              stopSound();
-              setSelectedItem(null);
-            }}
-          >
-            <Text style={styles.closeButtonText}>Close</Text>
-          </TouchableOpacity>
-        </SafeAreaView>
-      </Modal>
+          </SafeAreaView>
+        </Modal>
 
-      <StatusBar style={themeType === "dark" ? "light" : "dark"} />
-    </SafeAreaView>
+        <StatusBar style={themeType === "dark" ? "light" : "dark"} />
+      </SafeAreaView>
+    </>
   );
 };
 
