@@ -1,6 +1,6 @@
 # 🎧 PhonkBox
 
-> Listen to all the Phonk you want.
+> Groove to the Phonk
 
 PhonkBox is a modern web app built for streaming Brazilian Phonk music with a smooth, neon-inspired aesthetic. Designed for vibing, coding sessions, and pure dopamine.
 
@@ -10,10 +10,10 @@ PhonkBox is a modern web app built for streaming Brazilian Phonk music with a sm
 
 - 🎵 Stream Brazilian Phonk music
 - 🔊 Smooth audio player with controls
-- 📂 Organized track library
 - 💜 Neon / Cyberpunk inspired UI
 - ⚡ Fast and responsive design
-- 🌙 Dark mode aesthetic
+- 🔆/🌙 Light and Dark mode aesthetic
+- 🔍 Swiftly search for phonk of choice
 
 ---
 
@@ -30,5 +30,5 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/RonaldSWE/phonkbox.git
-cd phonkbox
+npx expo start
 ```
