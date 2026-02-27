@@ -54,7 +54,7 @@ const SearchBar = () => {
 
     // Filter songs by matching the query with song names (case-insensitive)
     const results = data.filter((song) =>
-      song.name.toLowerCase().includes(query.toLowerCase())
+      song.name.toLowerCase().includes(query.toLowerCase()),
     );
 
     // If no songs found, show "404, phonk not found" message
@@ -100,24 +100,6 @@ const SearchBar = () => {
     }
   };
 
-  // Restart the currently playing song
-  const restartSong = async (audioSource: any) => {
-    try {
-      if (sound) {
-        await sound.stopAsync();
-        await sound.unloadAsync();
-      }
-
-      // Create and play new sound from the beginning
-      const { sound: newSound } = await Audio.Sound.createAsync(audioSource);
-      setSound(newSound);
-      await newSound.playAsync();
-      setIsPlaying(true);
-    } catch (error) {
-      console.error("Error restarting song:", error);
-    }
-  };
-
   // Stop the currently playing song
   const stopSong = async () => {
     if (sound) {
@@ -131,7 +113,9 @@ const SearchBar = () => {
 
   return (
     <SafeAreaView style={{ backgroundColor: theme.colors.background }}>
-      <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <View
+        style={[styles.container, { backgroundColor: theme.colors.background }]}
+      >
         {/* Search input field */}
         <TextInput
           placeholder="Search song"
@@ -151,7 +135,9 @@ const SearchBar = () => {
         {/* Show "404, phonk not found" message when no results are found */}
         {notFound && (
           <View style={styles.notFoundContainer}>
-            <Text style={[styles.notFoundText, { color: theme.colors.primary }]}>
+            <Text
+              style={styles.notFoundText}
+            >
               404, Phonk Not Found
             </Text>
           </View>
@@ -215,10 +201,7 @@ const SearchBar = () => {
             ]}
           >
             <View style={styles.modalContent}>
-              <Image
-                source={selectedSong?.phonkImg}
-                style={styles.modalImg}
-              />
+              <Image source={selectedSong?.phonkImg} style={styles.modalImg} />
               <Text style={[styles.modalText, { color: theme.colors.text }]}>
                 {selectedSong?.name}
               </Text>
@@ -229,9 +212,6 @@ const SearchBar = () => {
                   styles.playButton,
                   { backgroundColor: theme.colors.primary },
                 ]}
-                onPress={() => {
-                  restartSong(selectedSong.audio);
-                }}
               >
                 <Text style={styles.playButtonText}>
                   {isPlaying ? "▶️ Restart" : "▶️ Play"}
@@ -277,6 +257,7 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
   },
   notFoundText: {
+    color: "rgb(255, 0, 0)",
     fontSize: 18,
     fontWeight: "bold",
   },

@@ -18,7 +18,7 @@ export interface Theme {
 export const lightTheme: Theme = {
   type: "light",
   colors: {
-    primary: "rgb(128, 0, 255)",
+    primary: "rgb(0, 51, 255)",
     background: "rgb(255, 255, 255)",
     text: "rgb(0, 0, 0)",
     border: "rgb(229, 229, 234)",
@@ -29,7 +29,7 @@ export const lightTheme: Theme = {
 export const darkTheme: Theme = {
   type: "dark",
   colors: {
-    primary: "rgb(128, 0, 255)",
+    primary: "rgb(0, 51, 255)",
     background: "rgb(0, 0, 0)",
     text: "rgb(255, 255, 255)",
     border: "rgb(56, 56, 58)",
@@ -53,7 +53,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   const [themeType, setThemeTypeState] = useState<ThemeType>(
     systemColorScheme === "dark" ? "dark" : "light",
   );
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [isInitialized, setIsInitialized] = useState<boolean>(false);
 
   // Load saved theme preference on mount
   useEffect(() => {

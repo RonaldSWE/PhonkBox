@@ -1,17 +1,14 @@
-import { StyleSheet, Text, View } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
-import { StatusBar } from "expo-status-bar"
-import React from "react"
-import { useTheme } from "../Theme/ThemeContext"
+import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { useTheme } from "../Theme/ThemeContext";
 
 const ContactUs = () => {
-  const { theme, themeType } = useTheme()
+  const { theme, themeType } = useTheme();
   return (
     <SafeAreaView
-      style={[
-        styles.container,
-        { backgroundColor: theme.colors.background },
-      ]}
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
       <View style={styles.header}>
         <Text style={[styles.title, { color: theme.colors.text }]}>
@@ -20,10 +17,10 @@ const ContactUs = () => {
       </View>
       <StatusBar style={themeType === "dark" ? "light" : "dark"} />
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default ContactUs
+export default ContactUs;
 
 const styles = StyleSheet.create({
   container: {
@@ -38,4 +35,4 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
   },
-})
+});

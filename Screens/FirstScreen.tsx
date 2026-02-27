@@ -12,7 +12,7 @@ const FirstScreen = () => {
   const navigation = useNavigation<FirstScreenNavigationProp>();
   const { theme } = useTheme();
   return (
-    <SafeAreaView style={[styles.container]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <ImageBackground
         source={require("../assets/images/PhonkBox Page.png")}
         style={styles.container}

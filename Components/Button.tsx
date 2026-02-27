@@ -6,7 +6,6 @@ import {
   ViewStyle,
   TextStyle,
 } from "react-native";
-import { useTheme } from "../Theme/ThemeContext";
 
 interface Props {
   title: string;
@@ -16,11 +15,10 @@ interface Props {
 }
 
 const AppButton: React.FC<Props> = ({ title, onPress, style, textStyle }: Props) => {
-  const { theme } = useTheme();
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      style={[styles.button, { backgroundColor: theme.colors.primary }, style]}
+      style={styles.button}
       onPress={onPress}
     >
       <Text style={[styles.text, textStyle]}>{title}</Text>
@@ -30,6 +28,7 @@ const AppButton: React.FC<Props> = ({ title, onPress, style, textStyle }: Props)
 
 const styles = StyleSheet.create({
   button: {
+    backgroundColor: "rgb(128, 0, 255)",
     paddingVertical: 12,
     paddingHorizontal: 25,
     borderRadius: 25,
